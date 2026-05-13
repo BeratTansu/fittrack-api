@@ -56,4 +56,21 @@ almamasının sebebi, odağı dağıtmamak ve projeyi bitirilebilir tutmak.
   Native vb.) gerekir, iş yükünü ikiye katlar.
 
 ## 6. Kullandığım Teknolojiler
-(yakında — beraber dolduracağız)
+
+### Backend
+
+- **FastAPI:** Type hints sayesinde input validation otomatik yapılıyor 
+  ve OpenAPI uyumlu dokümantasyon (Swagger UI) otomatik üretiliyor. 
+  Python ekosistemine hakim olduğum için geliştirme hızım yüksek.
+
+- **PostgreSQL:** FitTrack verisi ilişkisel — kullanıcı, antrenman ve 
+  egzersiz birbirine bağlı tablolar halinde. Endüstride yaygın 
+  kullanılan, açık kaynak ve gelişmiş bir veritabanı. JSON sütun 
+  desteği gibi modern özellikleri de var.
+
+- **Docker:** Uygulamayı izole bir ortamda çalıştırıyor, bağımlılıkları 
+  container içinde tutuyor. "Bende çalışıyor" problemini ortadan 
+  kaldırıyor. Backend + PostgreSQL'i tek komutla ayağa kaldırabiliyorum.
+
+### Frontend
+(Frontend geliştirmeye başlandığında doldurulacak)
