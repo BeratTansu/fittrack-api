@@ -1,60 +1,59 @@
-# FitTrack — Project Scope
+# FitTrack — Proje Kapsamı
 
-## 1. Overview
+## 1. Bu Proje Ne?
+FitTrack, kullanıcıların spor programlarını set ve tekrar sayısına 
+kadar kaydedip zaman içindeki ilerlemelerini takip etmelerini sağlayan 
+bir fitness takip uygulamasıdır.
 
-FitTrack is a personal workout tracking app, allowing users to log sessions, review history, and see clear progress week by week.
+## 2. Hangi Problemi Çözüyor?
+Spora düzenli giden biri olarak, geçen hafta hangi egzersizi kaç kilo 
+ile yaptığımı sürekli unutuyordum. "Bugün hangi gün, ne çalışacağım?" 
+sorusu her seferinde aklımı karıştırıyordu. FitTrack tam bu problemi 
+çözmek için doğdu — her antrenmanı kaydet, ilerlemeyi gör.
 
-## 2. Problem & Motivation
+## 3. Hedef Kullanıcı
+Sporla düzenli ilgilenen, antrenmanlarını sistematik takip etmek 
+isteyen herkes. Özellikle ağırlık çalışan, "geçen sefer kaç kilo 
+kaldırdım" sorusunu sık soran sporcular.
 
-Many lifters, including myself, often struggle to remember how much weight they lifted in their last workout, which makes consistent progress difficult. FitTrack allows them to easily log their workouts, sets and weights and shows how much progress they have made with stats, charts and comparisons.
+## 4. MVP Özellikleri
 
-## 3. User Stories
+### Kimlik Doğrulama
+- E-posta ve şifre ile kullanıcı kaydı
+- Giriş yapınca kullanıcıya bir token verilir
+- Şifreler veritabanında düz yazı olarak değil, hash'lenmiş halde saklanır
+- Sadece geçerli token'ı olan kullanıcılar antrenmanlara erişebilir
 
-- As a user, I want to create an account, so that I can record and track my progress.
-- As a user, I want to log in, so that I can access my existing account.
-- As a user, I want to add a workout for a specific day, so that I can keep a record of my training sessions.
-- As a user, I want to add exercises (sets, reps, weight) to a workout, so that I can see exactly what I did and how much I lifted.
-- As a user, I want to view my progress statistics, so that I can understand my overall improvement and stay motivated.
+### Antrenman Yönetimi
+- Antrenman oluştur, listele, güncelle, sil (CRUD)
+- Her antrenmanın bir adı, tarihi ve opsiyonel notu olur
+- Kullanıcı sadece kendi antrenmanlarını görür ve değiştirebilir
 
-## 4. MVP Features
+### Egzersiz Yönetimi
+- Bir antrenmana egzersiz ekle (set, tekrar, kilo)
+- Egzersizleri güncelle ve sil
+- Her egzersizin opsiyonel notu olabilir (örn: "form bozuldu")
 
-The first version of FitTrack will include the following features:
+## 5. Şimdilik Yapmayacağım Şeyler (Out of Scope)
 
-### Authentication
-- User registration with email and password
-- User login that returns a JWT token
-- Password hashing with bcrypt for security
-- Protected endpoints accessible only with a valid token
+Aşağıdaki özellikler ileride **feature** olarak eklenecek. MVP'de yer 
+almamasının sebebi, odağı dağıtmamak ve projeyi bitirilebilir tutmak.
 
-### Workout Management
-- Create, view, update, and delete workouts
-- Each workout has a name, date, optional duration, and optional notes
-- Users can only see and modify their own workouts
+- **Vücut ölçüleri (kilo, yağ oranı, çevre):** Ayrı bir problem alanı 
+  (kompozisyon takibi). MVP'nin asıl çözdüğü problem antrenman 
+  hatırlamak, vücut takibi başka bir özellik.
 
-### Exercise Management
-- Add exercises to a specific workout
-- Each exercise stores sets, reps, weight, and optional notes
-- Update or delete individual exercises
+- **İstatistikler ve grafikler:** Önce yeterli veri birikmesi gerekiyor. 
+  Kullanıcı 2-3 hafta antrenman kaydetmeden istatistiğin anlamı yok.
 
-### Body Measurements
-- Record body measurements (weight, body fat, chest, waist, arm)
-- View measurement history over time
+- **Sosyal özellikler (arkadaş ekleme, paylaşım):** Karmaşıklığı çok 
+  artırır (ilişkiler, izinler), ana probleme katkısı yok.
 
-### Statistics
-- View basic stats: weekly workout count, total weight lifted, most frequent exercise
+- **Hazır antrenman programları:** İçerik hazırlama gerektirir, ayrı 
+  bir veri modeli. MVP'de kullanıcı kendi antrenmanını giriyor.
 
-## 5. Out of Scope
+- **Mobil uygulama:** Sadece web. Mobil için ayrı bir kod tabanı (React 
+  Native vb.) gerekir, iş yükünü ikiye katlar.
 
-The following features are intentionally excluded from the MVP to keep the project focused and achievable within the 10-week timeline:
-
-- **Social features (friends, sharing, feed):** Adds significant complexity (relationships, permissions, real-time updates) without serving the core goal of personal progress tracking.
-- **Pre-built workout programs:** Requires content curation and a separate data model. The MVP focuses on user-generated workouts only.
-- **AI coaching or recommendations:** Would require ML infrastructure, training data, and ongoing model maintenance — far beyond the scope of a learning project.
-- **Nutrition tracking:** A full feature on its own (food database, macro calculations). Combining it with workout tracking dilutes the focus.
-- **Mobile application:** Web-only for the MVP. A mobile app would require a separate codebase (React Native or native development) and double the workload.
-- **Push notifications:** Requires third-party services (Firebase, OneSignal) and significantly complicates deployment for marginal value at this stage.
-- **Video integration (exercise tutorials):** Requires content licensing or hosting infrastructure. Users can find tutorials elsewhere; FitTrack's job is tracking, not teaching.
-
-## 6. Tech Stack
-
-FitTrack is built as a full-stack web application. The backend is a **FastAPI** (Python) service that exposes a RESTful API and handles authentication via **JWT**. Data is stored in a **PostgreSQL** database, accessed through the **SQLAlchemy** ORM, with schema migrations managed by **Alembic**. Passwords are hashed with **bcrypt**. The frontend is a single-page application built with **React** (Vite) and styled with **Tailwind CSS**. The entire backend stack runs locally via **Docker Compose**, with the production backend deployed to **Render** and the frontend to **Vercel**.
+## 6. Kullandığım Teknolojiler
+(yakında — beraber dolduracağız)
